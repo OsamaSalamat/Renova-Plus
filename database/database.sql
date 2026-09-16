@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS trade_offer_pro CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE trade_offer_pro;
+CREATE TABLE IF NOT EXISTS admins(id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,email VARCHAR(160) NOT NULL UNIQUE,password_hash VARCHAR(255) NOT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS promotions(id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(180) NOT NULL,subtitle VARCHAR(255) DEFAULT '',description TEXT,offer_text VARCHAR(120) DEFAULT 'LIMITED-TIME OFFER',end_date DATETIME NOT NULL,hero_image TEXT,is_active TINYINT(1) DEFAULT 1,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS leads(id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) NOT NULL,email VARCHAR(160) NOT NULL,phone VARCHAR(30) NOT NULL,renovation_interest ENUM('Yes','No') NOT NULL,consent TINYINT(1) NOT NULL,ip_address VARCHAR(45),user_agent VARCHAR(500),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,INDEX(created_at),INDEX(email));
+CREATE TABLE IF NOT EXISTS settings(setting_key VARCHAR(80) PRIMARY KEY,setting_value TEXT NOT NULL);
+INSERT INTO admins(email,password_hash) VALUES('admin@example.com','$2y$12$xsvSc.Jbn4B6BiyyEUeRF.vAvspVm9s8/jGP/JGgDYzdTIJNCKzCi') ON DUPLICATE KEY UPDATE password_hash=VALUES(password_hash);
+INSERT INTO settings VALUES('business_name','Renova+'),('phone','+61 400 000 000'),('email','hello@example.com'),('notification_email','hello@example.com'),('privacy_url','privacy.php') ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value);
+INSERT INTO promotions(title,subtitle,description,offer_text,end_date,hero_image,is_active) SELECT 'Transform your home.','Limited-time renovation offer','Tell us what you are planning and our team will contact you.','LIMITED-TIME OFFER',DATE_ADD(NOW(),INTERVAL 7 DAY),'',1 WHERE NOT EXISTS(SELECT 1 FROM promotions);
