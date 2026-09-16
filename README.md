@@ -1,6 +1,7 @@
 # Trade Offer Pro
 Complete custom PHP/MySQL lead-generation site.
-
+![Home Page](https://github.com/OsamaSalamat/Renova-Plus/blob/dd69b6fa7dcf98c23091f001a57e9d47a01fabd9/Screenshot%202026-09-16%20200320.png)
+![Home Page](https://github.com/OsamaSalamat/Renova-Plus/blob/dd69b6fa7dcf98c23091f001a57e9d47a01fabd9/Screenshot%202026-09-16%20200343.png)
 Features: responsive landing page, promotion countdown, lead modal, secure database storage, CSRF protection, PDO prepared statements, admin login, promotion CMS, settings, lead CRM, CSV export and notification-email hook.
 
 ## XAMPP
